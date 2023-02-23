@@ -60,8 +60,6 @@ app.use((req,res,next)=>{
 app.use(require('./router/default.js'));
 app.use(require('./router/user.js'));
 app.use(require('./router/note.js'));
-app.use(require('./router/category.js'));
-app.use(require('./router/animales.js'));
 
 // Static files
 app.use(express.static(path.join(__dirname, 'static')));
