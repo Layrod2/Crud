@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name='viewport' content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<link rel="stylesheet" href="/css/materialize.min.css">
+	<link rel="stylesheet" href="/css/porfolio.css">
+	<link rel="stylesheet" href="/css/main.css">
+	<link rel="stylesheet" href="/ico/bootstrap-icons.css">
+
+	<title>Aplicacion</title>
+</head>
+<body>
+
+	{{#if succ}}
+		{{succ}}
+	{{/if}}
+
+	{{#if err}}
+		{{err}}
+	{{/if}}
+
+	{{> nav }}
+
+	{{{ body }}}
+
+	<script src="/js/jquery-3.6.0.min.js" charset="utf-8"></script>
+	<script src="/js/materialize.min.js" charset="utf-8"></script>
+	<script src="/js/init.js" charset="utf-8"></script>
+	<script src="/js/main.js" charset="utf-8"></script>
+
+</body>
+</html>
