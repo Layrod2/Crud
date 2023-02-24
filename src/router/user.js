@@ -23,7 +23,8 @@ router.post('/register', OffSession, async (req, res) => {
   const query = await User.findOne({email:email});
 
 if(password != "" && repeat_password != "" && email != "" && name != ""){
-  if (!query) {
+  if(/^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(email)){
+    if (!query) {
     if (password == repeat_password) {
       const NewUser = new User({password, name, email});
       // password pass 1
@@ -40,9 +41,15 @@ if(password != "" && repeat_password != "" && email != "" && name != ""){
   req.flash('err', 'El correo electronico ya existe');
   res.redirect('/register');
   return;
+  } else {
+    req.flash('err', 'Ingrese un correo valido');
+  }
+  
+} else{
+    req.flash('err', 'Debe completar todos los campos');
+    
 }
-  req.flash('err', 'Debe completar todos los campos');
-  res.redirect('/register');
+    res.redirect('/register');
 });
 
 module.exports = router;

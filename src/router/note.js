@@ -41,10 +41,13 @@ router.post('/note', OnSession, async (req,res) => {
 });
 
 router.post('/note/delete/:id', OnSession, async (req,res) => {
-  const {id} = req.params;
-  await Note.findByIdAndDelete(id);
-  req.flash('succ', 'Nota Eliminada');
-  res.redirect('/note');
+
+    const {id} = req.params;
+    await Note.findByIdAndDelete(id);
+    req.flash('succ', 'Nota Eliminada');
+    res.redirect('/note');
+  
+  
 });
 
 module.exports = router;
