@@ -13,7 +13,7 @@ router.get('/register', OffSession, (req, res) => {
 });
 
 router.post('/login',OffSession, passport.authenticate('local', {
-    successRedirect: '/porfolio',
+    successRedirect: '/',
     failureRedirect: '/login',
     failureFlash: true
 }));
