@@ -13,15 +13,16 @@ router.get('/register', OffSession, (req, res) => {
 });
 
 router.post('/login',OffSession, passport.authenticate('local', {
-  successRedirect: '/porfolio',
-  failureRedirect: '/login',
-  failureFlash: true
+    successRedirect: '/porfolio',
+    failureRedirect: '/login',
+    failureFlash: true
 }));
 
 router.post('/register', OffSession, async (req, res) => {
   const {password, repeat_password, name, email} = req.body;
   const query = await User.findOne({email:email});
 
+if(password != "" && repeat_password != "" && email != "" && name != ""){
   if (!query) {
     if (password == repeat_password) {
       const NewUser = new User({password, name, email});
@@ -39,6 +40,9 @@ router.post('/register', OffSession, async (req, res) => {
   req.flash('err', 'El correo electronico ya existe');
   res.redirect('/register');
   return;
+}
+  req.flash('err', 'Debe completar todos los campos');
+  res.redirect('/register');
 });
 
 module.exports = router;

@@ -20,15 +20,16 @@ router.get('/note/update/:id', OnSession, async (req, res) => {
 router.post('/note/new', OnSession, async (req,res) => {
   const {title, description} = req.body;
 
-  if (!title || !description) {
+  if (title == "" || description == "") {
     req.flash('err', 'Debes completar todos los campos');
     res.redirect('/note/create');
+  } else{
+    const NewNote = new Note({title, description, create_by:req.user._id});
+    await NewNote.save()
+    req.flash('succ', 'Nota creada exitosamente.')
+    res.redirect('/note');
   }
-
-  const NewNote = new Note({title, description, create_by:req.user._id});
-  await NewNote.save()
-  req.flash('succ', 'Nota creada exitosamente.')
-  res.redirect('/note');
+  
 });
 
 router.post('/note', OnSession, async (req,res) => {
